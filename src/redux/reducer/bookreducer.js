@@ -4,6 +4,6 @@ export default function bookReducer(state = [], action) {
             return [...state, { ...action.payload }]
 
         default:
-            break;
+            return state;
     }
 } 

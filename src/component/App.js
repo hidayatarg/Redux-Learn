@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import BookPage from './component/BookPage'
+import BookPage from './BookPage'
 function App() {
   return (
     <div className="App">

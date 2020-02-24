@@ -27,8 +27,8 @@ this will warn us if we accidentally mutate Redux state.*/
 //Configure React Dev Tools
 
 import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from './reducers'
-import reduxImmutableStateInvariant from 'redux-immutable-state-invarent'
+import rootReducer from './reducer/index'
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
 export default function configureStore(initalState) {
     // add support for redux dev tools
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose 

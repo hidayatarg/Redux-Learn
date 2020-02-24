@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as bookActions from '../redux/actions/bookActions'
+import PropTypes from 'prop-types'
 
-export default class BookPage extends Component {
+
+class BookPage extends Component {
     state = {
         book : {
             title: ''
@@ -18,7 +22,7 @@ export default class BookPage extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log('gelen state: ', this.state.book)
+        this.props.dispatch(bookActions.createBook(this.state.book))
     }
 
     render() {
@@ -34,8 +38,28 @@ export default class BookPage extends Component {
                         type='submit'
                         value='save'
                     />
+
+                    {this.props.books.map(book => (
+                        <div key={book.title}>{book.title}</div>
+                    ))}
                     
                 </form>
         )
     }
 }
+
+BookPage.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired
+}
+
+// determines what part of the state we expose to component
+// this func determines what state is passed to our component via props
+
+function mapStateToProps(state) {
+    return {
+        books: state.books
+    }
+}
+
+export default connect(mapStateToProps)(BookPage)
