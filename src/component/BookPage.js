@@ -13,13 +13,17 @@ export default class BookPage extends Component {
             book: book
         })
         // log console
-        console.log('New State: ', this.state.book)
+        //console.log('New State: ', this.state.book)
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log('gelen state: ', this.state.book)
+    }
 
     render() {
         return (
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <h2>Books</h2>
                     <input 
                         type="text" 
