@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as bookActions from '../redux/actions/bookActions'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
 
 
 class BookPage extends Component {
@@ -22,7 +23,9 @@ class BookPage extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.dispatch(bookActions.createBook(this.state.book))
+        // debugger
+        // this.props.dispatch(bookActions.createBook(this.state.book))
+        this.props.actions.createBook(this.state.book)
     }
 
     render() {
@@ -50,7 +53,7 @@ class BookPage extends Component {
 
 BookPage.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    books: PropTypes.array.isRequired
+    actions: PropTypes.object.isRequired
 }
 
 // determines what part of the state we expose to component
@@ -62,4 +65,13 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(BookPage)
+function mapDispatchToProps(dispatch){
+    // the action we choose to return here will be avalibe in this component via props	
+    return {	   
+        actions: bindActionCreators(bookActions, dispatch)      
+        // if you dont wrap this with dispatch nothing will happen. actionCreators must be called by dispatch	        actions: bindActionCreators(courseActions, dispatch)
+        // calling courseAction directly will return an object	
+    }	    
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookPage)
